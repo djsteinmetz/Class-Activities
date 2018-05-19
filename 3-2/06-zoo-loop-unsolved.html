@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="UTF-8">
+    <title>Loops</title>
+  </head>
+  <body>
+
+    <h1>Open the console to see the magic!</h1>
+
+    <script>
+
+      /* Array of zoo animals.
+      var zooAnimals = ["Zebra", "Rhino", "Giraffe", "Owl"];
+
+       Rewrite the following code to print all of the animals using a for-loop.
+
+      for (var a = 0; a > 5; a--) {
+        console.log("I am " + a);
+      } 
+
+      //console.log(zooAnimals[0]);
+      //console.log(zooAnimals[1]);
+      //console.log(zooAnimals[2]);
+      //console.log(zooAnimals[3]);
+*/
+
+      /*var myFarm = ["chickens", "pigs", "cows", "horses", "ostriches"];
+
+      for (var farmAlphabet = 0; farmAlphabet < 5; farmAlphabet++) {
+
+        if (myFarm[farmAlphabet].charAt() == "c" || myFarm[farmAlphabet].charAt() == "o") {
+          document.write("Starts with c or an o!<br/>")
+        }
+
+      }*/
+
+      var cameras = ["canon", "nikon", "sony", "mamiya", "contax"];
+      var arrayLength = cameras.length;
+      var likesCameras = confirm("Do you like Cameras?");
+
+      for(var c = 0; c<arrayLength; c++) {
+        if(likesCameras) {
+          document.write(cameras[c] + " " + "is a great camera!<br/>");
+        }
+        else if(!likesCameras) {
+          break;
+          document.write("You don't like cameras");
+          }
+        //else {
+        //document.write("You don't like cameras");
+        }
+      //}
+        //else document.write("You don't like cameras.");
+//
+//        if (condition) {
+//    block of code to be executed if the condition is true
+//        } else { 
+//    block of code to be executed if the condition is false
+//}
+      
+    </script>
+    
+  </body>
+</html>
