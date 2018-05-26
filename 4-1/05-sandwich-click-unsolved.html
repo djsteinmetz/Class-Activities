@@ -16,6 +16,9 @@
   <h3 id="pbj">Peanut Butter Jelly</h3>
   <h3 id="grilledcheese">Grilled Cheese</h3>
   <h3 id="roastbeef">Roast Beef</h3>
+  <h3 id="throwAway">Throw Away</h3>
+  <h1>SANDWHICHES EATEN: <span id="sandwhichCounterDisplay">0</span></h1>
+  <h1>WASTED SANDWHICHES: <span id="wastedSandwhichDisplay">0</span></h1>
 
   <script type="text/javascript">
 
@@ -29,7 +32,14 @@
       // ====================================================================
       // Here we create variables for tracking the number of sandwiches eaten
       // ...
-      var sandwichesConsumed = 0;
+      var sandwhichesAttained = 0;
+      var sandwhichesWasted = 0;
+      var pbjSand = ("#pbj");
+      var grilledcheeseSand = ("#grilledcheese");
+      var roastbeefSand = ("#roastbeef");
+      var throwAwaySand = ("#throwAway");
+      var sandwhichCounterDisplay = 0;
+      var wastedSandwhichDisplay = 0;
 
       // ...
 
@@ -39,15 +49,26 @@
       // Inside each click event is the code to create an alert, update the counter, then show the updated count.
       // ...
       $("#pbj").click(function() {
-        alert("You ate a PB&J Sandwich");
-        sandwichesConsumed++;
-        alert("You have eaten " + sandwichesConsumed + " sandwhiches");
+        alert("You made a PB&J Sandwich");
+        sandwhichesAttained++;
+        alert("You have attained " + sandwhichesAttained + " sandwhiches");
+        $("#sandwhichCounterDisplay").text(sandwhichesAttained);
+        $("#wastedSandwhichDisplay").text(sandwhichesWasted);
       });
 
       $("#grilledcheese").click(function() {
-        alert("You ate a Grilled Cheese");
-        sandwichesConsumed++;
-        alert("You have eaten " + sandwichesConsumed + " sandwiches");
+        alert("You made a Grilled Cheese");
+        sandwhichesAttained++;
+        alert("You have attained " + sandwhichesAttained + " sandwiches");
+        $("#sandwhichCounterDisplay").text(sandwhichesWasted);
+      });
+
+      $("#throwAway").click(function() {
+        alert("You threw away a sandwich!");
+        sandwhichesAttained--;
+        sandwhichesWasted++;
+        alert("You now have " + sandwhichesAttained + " sandwhiches");
+        $("#wastedSandwhichDisplay").text(sandwhichesWasted);
       });
 
       // ...
