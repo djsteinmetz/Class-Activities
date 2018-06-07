@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <title>Favorite Movies</title>
+  <style type="text/css">
+    button,
+    div,
+    form,
+    input {
+      margin: 10px;
+    }
+
+    h1 {
+      font-family: 'Jua', sans-serif;
+      text-align: center;
+      font-size: 50px;
+    }
+
+    p {
+      font-family: 'Open Sans Condensed', sans-serif;
+      text-align: center;
+    }
+
+  </style>
+  <link href="https://fonts.googleapis.com/css?family=Jua|Open+Sans+Condensed:300" rel="stylesheet">
+
+
+</head>
+
+<body>
+
+  <div class="container">
+    <h1>Movie Search</h1>
+
+    <!-- Rendered buttons will get dumped Here  -->
+    <div id="buttons-view"></div>
+
+    <form id="movie-form">
+      <label for="movie-input">Add a Movie Bro</label>
+      <input type="text" id="movie-input"><br>
+
+      <!-- Button triggers new movie to be added -->
+      <input id="add-movie" type="submit" value="Add a Movie Bro">
+    </form>
+
+    <!-- Movies will get dumped here -->
+    <div id="movies-view"></div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script type="text/javascript">
+      // Initial array of movies
+      var movies = ["The Matrix", "The Notebook", "Mr. Nobody", "The Lion King"];
+
+      // displayMovieInfo function re-renders the HTML to display the appropriate content
+      function displayMovieInfo() {
+
+        var movie = $(this).attr("data-name");
+        var queryURL = "https://www.omdbapi.com/?t=" + movie + "&y=&plot=short&apikey=trilogy";
+
+        // Creates AJAX call for the specific movie button being clicked
+        $.ajax({
+          url: queryURL,
+          method: "GET"
+        }).then(function(response) {
+          // YOUR CODE GOES HERE!!!
+          var releaseDateConverted = response.Released.split(" ");
+          var newH1 = $("<h1>").html(response.Title);
+          var newP = $("<p>").html(response.Plot);
+
+          console.log(releaseDateConverted)
+          
+          $("#movies-view").append(newP)
+         
+          
+          $("#movies-view").prepend("<h2 style= 'text-align:center;'>Released on " + releaseDateConverted[1] + " " + releaseDateConverted[0] + ", " + releaseDateConverted[2] + "</h2>");
+          $("#movies-view").prepend("<img style='display: block; margin-left:auto; margin-right:auto; width:50%; max-width: 200px;' src=" + response.Poster + ">");
+          // This is the DRY way to make the H1 for the movie title
+          $("#movies-view").prepend(newH1)
+
+          // This is the not 'DRY' way to make an H1 for the Movie Title
+          // $("#movies-view").prepend("<h1>" + response.Title + "</h1>");
+          
+          
+
+        });
+
+      }
+
+      // Function for displaying movie data
+      function renderButtons() {
+
+        // Deletes the movies prior to adding new movies
+        // (this is necessary otherwise you will have repeat buttons)
+        $("#buttons-view").empty();
+
+        // Loops through the array of movies
+        for (var i = 0; i < movies.length; i++) {
+
+          // Then dynamicaly generates buttons for each movie in the array
+          // This code $("<button>") is all jQuery needs to create the beginning and end tag. (<button></button>)
+          var a = $("<button>");
+          // Adds a class of movie to our button
+          a.addClass("movie");
+          // Added a data-attribute
+          a.attr("data-name", movies[i]);
+          // Provided the initial button text
+          a.text(movies[i]);
+          // Added the button to the buttons-view div
+          $("#buttons-view").append(a);
+        }
+      }
+
+      // This function handles events where the add movie button is clicked
+      $("#add-movie").on("click", function(event) {
+        event.preventDefault();
+        // This line of code will grab the input from the textbox
+        var movie = $("#movie-input").val().trim();
+
+        // The movie from the textbox is then added to our array
+        movies.push(movie);
+
+        // Calling renderButtons which handles the processing of our movie array
+        renderButtons();
+
+      });
+
+      // Adding click event listeners to all elements with a class of "movie"
+      $(document).on("click", ".movie", displayMovieInfo);
+
+      // Calling the renderButtons function to display the intial buttons
+      renderButtons();
+    </script>
+  </div>
+</body>
+
+</html>
