@@ -1,0 +1,13 @@
+CREATE DATABASE great_bayDB;
+
+USE great_bayDB;
+
+CREATE TABLE for_auction (
+ id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+ item VARCHAR(100) NULL,
+ starting_bid FLOAT(7,2)NOT NULL,
+ bidder VARCHAR(50)NOT NULL
+ 
+);
+
+SELECT*FROM great_bayDB
