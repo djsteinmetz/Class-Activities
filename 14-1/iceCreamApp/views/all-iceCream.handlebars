@@ -1,0 +1,19 @@
+<style media="screen">
+    .description {
+        border: 1px solid black;
+        margin: auto;
+        width: 100%;
+    }
+</style>
+
+<h1>Ice Cream for {{eater}}</h1>
+
+<ul>
+    {{#ice_cream }}
+    <div>
+        <h1>{{name}}</h1>
+        <h2>{{price}}
+        <br/>{{awesomeness}}</h2>
+    </div>
+    {{/ice_cream}}
+</ul>
