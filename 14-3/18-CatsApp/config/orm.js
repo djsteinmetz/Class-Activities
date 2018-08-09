@@ -50,6 +50,13 @@ var orm = {
       cb(result);
     });
   },
+  allWhere: function(tableInput, condition, cb) {
+    var queryString = "SELECT * FROM " + tableInput + " WHERE id = " + condition;
+    connection.query(queryString, function(err, result) {
+      if(err) throw err;
+      cb(result);
+    })
+  },
   create: function(table, cols, vals, cb) {
     var queryString = "INSERT INTO " + table;
 
@@ -88,9 +95,14 @@ var orm = {
       cb(result);
     });
   },
-  delete: function(table, colVal, condition) {
-    var queryString = "DELETE " ? "WHERE" + ? = ?,
-  [table, colVal, condition]
+  delete: function(table, condition, cb) {
+    var queryString = "DELETE FROM " + table; 
+    queryString+= " WHERE " + condition;
+    connection.query(queryString, function(err, result){
+      if(err) throw err;
+      cb(result);
+    })
+
   }
 };
 

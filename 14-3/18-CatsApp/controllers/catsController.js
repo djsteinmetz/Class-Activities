@@ -1,5 +1,4 @@
 var express = require("express");
-
 var router = express.Router();
 
 // Import the model (cat.js) to use its database functions.
@@ -15,7 +14,19 @@ router.get("/", function(req, res) {
     res.render("index", hbsObject);
   });
 });
-
+router.get("/api/cats/:id?", function(req, res) {
+  var condition = req.params.id
+  if(!condition) {
+    cat.all(function(data) {
+      res.json(data);
+    })
+  } else {
+    cat.allWhere(condition, function(data) {
+      res.json(data);
+    })
+  }
+  
+});
 router.post("/api/cats", function(req, res) {
   cat.create([
     "name", "sleepy"
@@ -40,6 +51,20 @@ router.put("/api/cats/:id", function(req, res) {
       return res.status(404).end();
     } else {
       res.status(200).end();
+    }
+  });
+});
+
+router.delete("/api/cats/:id", function(req, res) {
+  var condition = "id = " + req.params.id;
+
+  console.log("condition: ", condition);
+
+  cat.delete(condition, function(result) {
+    if(result.affectedRows == 0) {
+      return res.status(404).end();
+    } else {
+      return res.status(200).end();
     }
   });
 });

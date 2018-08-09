@@ -7,6 +7,11 @@ var cat = {
       cb(res);
     });
   },
+  allWhere: function(condition, cb) {
+    orm.allWhere("cats", condition, function(res){
+      cb(res);
+    })
+  },
   // The variables cols and vals are arrays.
   create: function(cols, vals, cb) {
     orm.create("cats", cols, vals, function(res) {
@@ -18,8 +23,10 @@ var cat = {
       cb(res);
     });
   },
-  delete: function(objColVals, condition, cb) {
-    orm.delete("cats")
+  delete: function(condition, cb) {
+    orm.delete("cats", condition, function(res) {
+      cb(res);
+    })
   }
 };
 
